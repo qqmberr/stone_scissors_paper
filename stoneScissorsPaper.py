@@ -5,8 +5,8 @@ from telebot import types
 
 bot = telebot.TeleBot('6303626612:AAEqfKVfl5rVw4-yiZts0QJoVr6CkvOP6Qs')
 print('Бот запущен')
-winHuman = [0]
-winBot = [0]
+winhuman = [0]
+winbot = [0]
 
 
 # Обработка команды start
@@ -24,7 +24,7 @@ def start(message):
     bot.send_photo(message.chat.id, file, 'Выбери камень, ножницы или бумага 🤭', reply_markup=markup)
 
 
-def button_rek(message, winHuman1 = winHuman, winBot1 = winBot):
+def button_rek(message, winhuman1=winhuman, winbot1=winbot):
     roshambo = ['Камень', 'Ножницы', 'Бумага']
     random_roshambo = random.choice(roshambo)
     # Действия с кнопкапками
@@ -37,21 +37,21 @@ def button_rek(message, winHuman1 = winHuman, winBot1 = winBot):
     if random_roshambo == message.text:
         bot.send_message(message.chat.id, random_roshambo)
         bot.send_message(message.chat.id, 'Ничья, попробуй снова!')
-        bot.send_message(message.chat.id, f'Счет {winHuman1[0]}: {winBot1[0]}')
+        bot.send_message(message.chat.id, f'Счет {winhuman1[0]}:{winbot1[0]}')
     elif win1 or win2 or win3:
         bot.send_message(message.chat.id, random_roshambo)
         bot.send_message(message.chat.id, 'Ура! Победа!')
-        winHuman1 = [winHuman1[0] + 1]
-        winHuman.clear()
-        winHuman.append(winHuman1[0])
-        bot.send_message(message.chat.id, f'Счет {winHuman1[0]}: {winBot1[0]}')
+        winhuman1 = [winhuman1[0] + 1]
+        winhuman.clear()
+        winhuman.append(winhuman1[0])
+        bot.send_message(message.chat.id, f'Счет {winhuman1[0]}:{winbot1[0]}')
     elif lose1 or lose2 or lose3:
         bot.send_message(message.chat.id, random_roshambo)
         bot.send_message(message.chat.id, 'Извини, ты проиграл)')
-        winBot1 = [winBot1[0] + 1]
-        winBot.clear()
-        winBot.append(winBot1[0])
-        bot.send_message(message.chat.id, f'Счет {winHuman1[0]}: {winBot1[0]}')
+        winbot1 = [winbot1[0] + 1]
+        winbot.clear()
+        winbot.append(winbot1[0])
+        bot.send_message(message.chat.id, f'Счет {winhuman1[0]}:{winbot1[0]}')
     else:
         bot.send_message(message.chat.id, 'Чтобы сыграть введи команду <b><i>/start</i></b>', parse_mode='html')
 
