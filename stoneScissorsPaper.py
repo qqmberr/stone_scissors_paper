@@ -19,12 +19,16 @@ def start(message):
     markup.row(btn1, btn2, btn3)
     btn4 = types.KeyboardButton('Правила')
     markup.row(btn4)
-    print('......')
     file = open('./all.png', 'rb')
     bot.send_photo(message.chat.id, file, 'Выбери камень, ножницы или бумага 🤭', reply_markup=markup)
 
 
-def button_rek(message, winhuman1=winhuman, winbot1=winbot):
+def button_rek(message, winhuman1=None, winbot1=None):
+    print(winbot, winhuman)
+    if winbot1 is None:
+        winbot1 = winbot
+    if winhuman1 is None:
+        winhuman1 = winhuman
     roshambo = ['Камень', 'Ножницы', 'Бумага']
     random_roshambo = random.choice(roshambo)
     # Действия с кнопкапками
@@ -65,10 +69,10 @@ def link(message):
 # Обработка введенного текста
 @bot.message_handler()
 def info(message):
-     if message.text.lower() == 'привет':
-         bot.send_message(message.chat.id, f'Привет, {message.from_user.first_name} {message.from_user.last_name}')
-     else:
-         button_rek(message)
+    if message.text.lower() == 'привет':
+        bot.send_message(message.chat.id, f'Привет, {message.from_user.first_name} {message.from_user.last_name}')
+    else:
+        button_rek(message)
 
 
 bot.polling(none_stop=True)
